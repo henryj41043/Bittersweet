@@ -1,8 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MiscScripts/TitleScript.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MiscScripts\SpecialAttackManager.js">
     <Files>
-      <File FileName="Assets/MiscScripts/TitleScript.js" Line="1" Column="1" />
+      <File FileName="Assets\Enemies\CCG\CCGAnimation.js" Line="1" Column="1" />
+      <File FileName="Assets\Enemies\PPM\MinerAnimation.js" Line="51" Column="19" />
+      <File FileName="Assets\Enemies\PPM\MinerEnemy.js" Line="46" Column="2" />
+      <File FileName="Assets\Enemies\PPM\MinerHealth.js" Line="1" Column="1" />
+      <File FileName="Assets\Enemies\CCG\CCGEnemy.js" Line="52" Column="2" />
+      <File FileName="Assets\Enemies\CCG\CCGHealth.js" Line="24" Column="35" />
+      <File FileName="Assets\Enemies\Gent\GentAnimation.js" Line="1" Column="1" />
+      <File FileName="Assets\Enemies\Gent\GentEnemy.js" Line="52" Column="2" />
+      <File FileName="Assets\Enemies\Gent\GentHealth.js" Line="18" Column="27" />
+      <File FileName="Assets\MiscScripts\SpecialAttackManager.js" Line="21" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

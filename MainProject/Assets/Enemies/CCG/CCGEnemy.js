@@ -43,6 +43,13 @@ function Start () {
 
 function Update () {
 	transform.rotation.x = 0;
+	
+	if (amIDead == true) {
+		AbleToMove(false);
+		AbleToAttack(false);
+		AbleToRotate(false);
+	}
+	
 	if (ableToRotate == true) {
 		transform.LookAt(player.transform);
 	}
@@ -57,12 +64,6 @@ function Update () {
 		if ((Vector3.Distance(transform.position, player.transform.position) < attackDetectionRange)) {
 			AttackWindupPhase();
 		}
-	}
-	
-	if (amIDead == true) {
-		AbleToMove(false);
-		AbleToAttack(false);
-		AbleToRotate(false);
 	}
 }
 
@@ -121,20 +122,6 @@ function HitstunRecoveryPhase () {
 }
 
 function PlayCCGDeath () {
-	BroadcastMessage("PlayCCGDeath");
 	amIDead = true;
 	Destroy(gameObject, deathDuration);
 }
-
-/*function DropCandy() {
-	candyDrop = Random.Range(1, 4);
-	if (candyDrop == 1) {
-		Instantiate(chocolateDrop, Vector3(transform.position.x + Random.Range(minimumDropRange, maximumDropRange), transform.position.y, transform.position.z + Random.Range(minimumDropRange, maximumDropRange)), transform.rotation);
-	}
-	if (candyDrop == 2) {
-		Instantiate(gummyDrop, Vector3(transform.position.x + Random.Range(minimumDropRange, maximumDropRange), transform.position.y, transform.position.z + Random.Range(minimumDropRange, maximumDropRange)), transform.rotation);
-	}
-	if (candyDrop == 3) {
-		Instantiate(lollipopDrop, Vector3(transform.position.x + Random.Range(minimumDropRange, maximumDropRange), transform.position.y, transform.position.z + Random.Range(minimumDropRange, maximumDropRange)), transform.rotation);
-	}
-}*/

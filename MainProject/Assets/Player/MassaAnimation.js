@@ -4,10 +4,10 @@ var run : AudioClip;
 var attack1 : AudioClip;
 var attack2 : AudioClip;
 var attack3 : AudioClip;
+var attackR : AudioClip;
 var dodge : AudioClip;
 var death : AudioClip;
 var recoil : AudioClip;
-var specialAttack : AudioClip;
 
 
 function PlayMassaIdle() {
@@ -53,6 +53,14 @@ function PlayMassaAttack3() {
 	}
 }
 
+function PlayMassaAttackR() {
+	if (!animation.IsPlaying("Death")) {
+		animation.Play("AttackR");
+		audio.clip = attackR;
+		audio.Play();
+	}
+}
+
 function PlayMassaDeath() {
 	if (!animation.IsPlaying("Death")) {
 		animation.Play("Death");
@@ -73,14 +81,6 @@ function PlayMassaRecoil() {
 	if (!animation.IsPlaying("Death")) {
 		animation.Play("Recoil");
 		audio.clip = recoil;
-		audio.Play();
-	}
-}
-
-function PlayMassaSpecialAttack() {
-	if (!animation.IsPlaying("Death")) {
-		animation.Play("SpecialAttack");
-		audio.clip = specialAttack;
 		audio.Play();
 	}
 }

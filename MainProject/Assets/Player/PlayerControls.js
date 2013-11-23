@@ -258,6 +258,7 @@ function AttackEndPhaseL0 () {
 }
 
 function AttackWindupPhaseR0 () {
+	BroadcastMessage("PlayMassaAttackR");
 	AbleToMove(false);
 	AbleToAttack(false);
 	AbleToDodge(false);
