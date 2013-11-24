@@ -17,18 +17,20 @@ function Update () {
 		SendMessageUpwards("TruffleFrag");
 		MassaAnimation.SendMessage("PlaySpecialAttack");
 	}
+	*/
 	if (Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha4)) {
-		SendMessageUpwards("StickySlide");
-		MassaAnimation.SendMessage("PlaySpecialAttack");
+		SendMessageUpwards("MeltyTruffle");
+		//MassaAnimation.SendMessage("PlaySpecialAttack");
 	}
 	if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.Alpha5)) {
-		SendMessageUpwards("CakePopPolearm");
-		MassaAnimation.SendMessage("PlaySpecialAttack");
+		SendMessageUpwards("StickySlide");
+		//MassaAnimation.SendMessage("PlaySpecialAttack");
 	}
 	if (Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6)) {
-		SendMessageUpwards("GummyBind");
-		MassaAnimation.SendMessage("PlaySpecialAttack");
+		SendMessageUpwards("TruffleFrag");
+		//MassaAnimation.SendMessage("PlaySpecialAttack");
 	}
+	/*
 	if (Input.GetKeyDown(KeyCode.Keypad7) || Input.GetKeyDown(KeyCode.Alpha7)) {
 		SendMessageUpwards("YumYumShield");
 		MassaAnimation.SendMessage("PlaySpecialAttack");

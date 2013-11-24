@@ -26,3 +26,9 @@ function PlayGentDeath() {
 		audio.Play();
 	}
 }
+
+function PlayGentHitstun() {
+        if (!animation.IsPlaying("Death")) {
+                animation.Stop();
+        }
+}

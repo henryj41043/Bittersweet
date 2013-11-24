@@ -130,7 +130,7 @@ function OnGUI(){
     	
 		
     	//Chocolate Truffle
-    	
+    	/*
     	ChocolateTruffleArray[1] = System.Int32.Parse(ChocolateTruffleStaringDistance);
     	ChocolateTruffle.startingDistance = ChocolateTruffleArray[1];
     	
@@ -145,7 +145,7 @@ function OnGUI(){
     	
     	ChocolateTruffleArray[5] = System.Int32.Parse(ChocolateTruffleDamage);
     	ChocolateTruffle.damage = ChocolateTruffleArray[5];
-    	
+    	*/
     	
     	//Truffle Frag
     	/*

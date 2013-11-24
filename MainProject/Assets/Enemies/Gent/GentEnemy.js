@@ -7,6 +7,9 @@ var minimumDropRange : float;
 var maximumDropRange : float;
 private var candyDrop : int;
 
+public var minimumHitstunDuration = 1;
+public var hitstunReduction = 0.5;
+
 var ableToMove : boolean;
 var moveSpeed : float;
 
@@ -107,11 +110,18 @@ function AbleToRotate (receivedInput : boolean) {
 }
 
 function HitstunImmobilizationPhase(hitstunDuration : float) {
-	CancelInvoke("HitstunRecoveryPhase");
-	AbleToMove(false);
-	AbleToAttack(false);
-	AbleToRotate(false);
-	Invoke("HitstunRecoveryPhase", 0);
+        Debug.Log("Gent Hitstun");
+        CancelInvoke("HitstunRecoveryPhase");
+        AbleToMove(false);
+        AbleToAttack(false);
+        AbleToRotate(false);
+        if (hitstunDuration > minimumHitstunDuration) {
+                Invoke("HitstunRecoveryPhase", hitstunDuration * hitstunReduction);
+                BroadcastMessage("PlayGentHitstun");
+        }
+        else {
+                Invoke("HitstunRecoveryPhase", 0);
+        }
 }
 
 function HitstunRecoveryPhase () {
