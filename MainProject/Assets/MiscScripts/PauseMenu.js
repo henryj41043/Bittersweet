@@ -168,8 +168,8 @@ function OnGUI(){
     	// Sticky Slide
     	
     	
-    	StickySlideArray[1] = System.Int32.Parse(StickySlideDamage);
-    	StickySlide.damage = StickySlideArray[1];
+    	//StickySlideArray[1] = System.Int32.Parse(StickySlideDamage);
+    	//StickySlide.damage = StickySlideArray[1];
     	/*
     	StickySlideArray[2] = System.Int32.Parse(StickySlideSpeed);
     	StickySlide.travelSpeed = StickySlideArray[2];

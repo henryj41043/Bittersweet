@@ -1,13 +1,9 @@
 ﻿#pragma strict
+var damage : float;
+var duration : float;
 
-private var damage : float;
-
-function Damage (receivedDamage : float) {
-	damage = receivedDamage;
-}
-
-function DamageRadius (receivedDamageRadius : float) {
-	transform.localScale = Vector3(receivedDamageRadius, receivedDamageRadius, receivedDamageRadius);
+function Start () {
+	Invoke("EndStickySlide", duration);
 }
 
 function OnTriggerEnter (object : Collider) {
@@ -17,5 +13,6 @@ function OnTriggerEnter (object : Collider) {
 }
 
 function EndStickySlide () {
+	Debug.Log("EndStickySlide");
 	Destroy(gameObject);
 }
