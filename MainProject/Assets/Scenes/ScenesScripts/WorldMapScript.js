@@ -17,7 +17,7 @@ function OnGUI () {
 	GUI.skin = dot;
 	GUI.skin = glow;
 	
-	if(GUI.Button(Rect(140, 220,buttonWidth,buttonHeight),"",customStyle))
+	if(GUI.Button(Rect(140, 220,buttonWidth,buttonHeight),"LEVEL",customStyle))
 	{
 			
 		Application.LoadLevel("Main");
