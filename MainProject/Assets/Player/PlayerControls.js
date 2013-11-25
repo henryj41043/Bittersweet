@@ -155,6 +155,105 @@ function Update () {
 				}
 			}
 		}
+		
+		if (playerTransformation == 1) {
+			if (Input.GetMouseButtonDown(0)) {
+				if (Input.GetKey(KeyCode.W)) {
+					attackFactorL0 = attackForwardFactorL0;
+					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.S)) {
+					attackFactorL0 = attackBackwardFactorL0;
+					moveDirection = Vector3(-transform.forward.x, gravity, -transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.D)) {
+					attackFactorL0 = attackSidewaysFactorL0;
+					moveDirection = Vector3(transform.right.x, gravity, transform.right.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.A)) {
+					attackFactorL0 = attackSidewaysFactorL0;
+					moveDirection = Vector3(-transform.right.x, gravity, -transform.right.z);
+					AttackWindupPhaseL0();
+				}
+				else {
+					attackFactorL0 = attackForwardFactorL0;
+					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+			}
+			if (Input.GetMouseButtonDown(1)) {
+				GetComponentInChildren(MeltyTruffle).MeltyTruffle();
+			}
+		}
+		
+		if (playerTransformation == 2) {
+			if (Input.GetMouseButtonDown(0)) {
+				if (Input.GetKey(KeyCode.W)) {
+					attackFactorL0 = attackForwardFactorL0;
+					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.S)) {
+					attackFactorL0 = attackBackwardFactorL0;
+					moveDirection = Vector3(-transform.forward.x, gravity, -transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.D)) {
+					attackFactorL0 = attackSidewaysFactorL0;
+					moveDirection = Vector3(transform.right.x, gravity, transform.right.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.A)) {
+					attackFactorL0 = attackSidewaysFactorL0;
+					moveDirection = Vector3(-transform.right.x, gravity, -transform.right.z);
+					AttackWindupPhaseL0();
+				}
+				else {
+					attackFactorL0 = attackForwardFactorL0;
+					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+			}
+			if (Input.GetMouseButtonDown(1)) {
+				GetComponentInChildren(StickySlide).StickySlide();
+			}
+		}
+		
+		if (playerTransformation == 3) {
+			if (Input.GetMouseButtonDown(0)) {
+				if (Input.GetKey(KeyCode.W)) {
+					attackFactorL0 = attackForwardFactorL0;
+					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.S)) {
+					attackFactorL0 = attackBackwardFactorL0;
+					moveDirection = Vector3(-transform.forward.x, gravity, -transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.D)) {
+					attackFactorL0 = attackSidewaysFactorL0;
+					moveDirection = Vector3(transform.right.x, gravity, transform.right.z);
+					AttackWindupPhaseL0();
+				}
+				else if (Input.GetKey(KeyCode.A)) {
+					attackFactorL0 = attackSidewaysFactorL0;
+					moveDirection = Vector3(-transform.right.x, gravity, -transform.right.z);
+					AttackWindupPhaseL0();
+				}
+				else {
+					attackFactorL0 = attackForwardFactorL0;
+					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
+					AttackWindupPhaseL0();
+				}
+			}
+			if (Input.GetMouseButtonDown(1)) {
+				GetComponentInChildren(TruffleFrag).TruffleFrag();
+			}
+		}
 	}
 	
 	if (attackingL0 == true) {
