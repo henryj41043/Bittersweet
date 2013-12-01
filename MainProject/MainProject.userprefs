@@ -1,14 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scenes/ScenesScripts/HelpPage1.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scenes/ScenesScripts/HelpPage5.js">
     <Files>
-      <File FileName="Assets/MiscScripts/CollectItems.js" Line="1" Column="1" />
-      <File FileName="Assets/MiscScripts/CandyDrop.js" Line="1" Column="1" />
-      <File FileName="Assets/Player/PlayerControls.js" Line="1" Column="1" />
-      <File FileName="Assets/Player/PlayerHealth.js" Line="1" Column="1" />
       <File FileName="Assets/Scenes/ScenesScripts/TitleScript.js" Line="30" Column="34" />
-      <File FileName="Assets/Scenes/ScenesScripts/WorldMapScript.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/HelpPage1.js" Line="10" Column="24" />
+      <File FileName="Assets/Scenes/ScenesScripts/WorldMapScript.js" Line="6" Column="39" />
+      <File FileName="Assets/Scenes/ScenesScripts/HelpPage1.js" Line="4" Column="1" />
+      <File FileName="Assets/Scenes/ScenesScripts/HelpPage2.js" Line="20" Column="63" />
+      <File FileName="Assets/Scenes/ScenesScripts/HelpPage3.js" Line="20" Column="63" />
+      <File FileName="Assets/Scenes/ScenesScripts/HelpPage4.js" Line="20" Column="63" />
+      <File FileName="Assets/Scenes/ScenesScripts/HelpPage5.js" Line="17" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

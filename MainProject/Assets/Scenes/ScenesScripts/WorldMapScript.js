@@ -1,26 +1,13 @@
 ﻿#pragma strict
-var customSkin: GUISkin;
-var glow: GUISkin;
-var dot: GUISkin;
-var customStyle: GUIStyle;
-//var glowTexture: Texture2D;
+var lollipopNode1: GUIStyle;
+private var lollipopNode1Width : int = 50;
+private var lollipopNode1Height : int = 50;
+private var lollipopNode1X : int = 149;
+private var lollipopNode1Y : int = 236;
 
-function OnGUI () {
-	//glowTexture.enabled = false;
-	var buttonWidth: int = 85;
-	var buttonHeight: int = 85;
-	
-	var halfScreenWidth: float = Screen.width/2;
-	var halfButtonWidth: float = buttonWidth/2;
-	
-	GUI.skin = customSkin;
-	GUI.skin = dot;
-	GUI.skin = glow;
-	
-	if(GUI.Button(Rect(140, 220,buttonWidth,buttonHeight),"LEVEL",customStyle))
-	{
-			
+function OnGUI () {	
+	if(GUI.Button(Rect(lollipopNode1X, lollipopNode1Y, lollipopNode1Width, lollipopNode1Height),"",lollipopNode1))
+	{	
 		Application.LoadLevel("Main");
-	
 	}
 }
