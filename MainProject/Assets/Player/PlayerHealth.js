@@ -1,18 +1,13 @@
 ﻿public static var maxHealth : int = 10;
 private var curHealth : int;
 var heartGUI:GUITexture;
-private var Xstart:float = -0.138;
+private var Xstart:float = 0.055;
 private var spacingX:float;
-private var spacingY:float = 0.63;
-private var Xinterval:float = 0.055;
+private var spacingY:float = -0.1;
+private var Xinterval:float = 0.03;
 private var hearts = new Array();
 
 function Start () {
-	/*
-	//add para here for testing
-	maxHealth = OnStartGame.paraArray[3];
-	//
-	*/
 	curHealth = maxHealth;
 	AddHearts();
 }
