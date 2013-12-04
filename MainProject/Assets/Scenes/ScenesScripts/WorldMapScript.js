@@ -12,4 +12,12 @@ function OnGUI () {
 	{
 		Application.LoadLevel("Main");
 	}
+	
+	/*
+	var menuMusic : GameObject = GameObject.Find("MenuMusic");
+		    if (menuMusic) {
+		        // kill menu music
+		        Destroy(menuMusic);
+		    }
+	*/
 }

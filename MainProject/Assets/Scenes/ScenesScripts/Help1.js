@@ -15,6 +15,12 @@ function OnGUI () {
 	if(GUI.Button(Rect(backX, backY, buttonWidth, buttonHeight), "", backStyle))
 	{
 		Application.LoadLevel("TitleScene");
+		var menuMusic : GameObject = GameObject.Find("MenuMusic");
+		    if (menuMusic) {
+		        // kill menu music
+		        Destroy(menuMusic);
+		    }
+		
 	
 	}
 	

@@ -5,11 +5,16 @@ private var time : double = 0.0;
 
 private var transformEnabled = false;
 private var candyBarSize = 5.0;
-private var cooldownTime = 5.0;
+private var cooldownTime = 10.0;
 private var cooldown = 0.0;
 private var candyCount = 0.0;
 private var inCooldown = false;
 var candyBarGUI : GUITexture;
+var candyPickUp : AudioClip;
+var candyFull : AudioClip;
+var chocolateChange : AudioClip;
+var gummyChange : AudioClip;
+var lollipopChange : AudioClip;
 private var candyBarGUIWidth = 0.0;
 
 private var transformationIsEndable : boolean;
@@ -36,24 +41,48 @@ function Update () {
 			inCooldown = true;
 			transformEnabled = false;
 			transformationIsEndable = true;
+			
+			audio.clip = chocolateChange;
+			if(!audio.isPlaying)
+			{
+				audio.Play();
+			}
 		}
 		if(Input.GetKeyDown("2")){
 			GetComponent(PlayerControls).CurrentTransformation(2);
 			inCooldown = true;
 			transformEnabled = false;
 			transformationIsEndable = true;
+			
+			audio.clip = gummyChange;
+			if(!audio.isPlaying)
+			{
+				audio.Play();
+			}
 		}
 		if(Input.GetKeyDown("3")){
 			GetComponent(PlayerControls).CurrentTransformation(3);
 			inCooldown = true;
 			transformEnabled = false;
 			transformationIsEndable = true;
+			
+			audio.clip = lollipopChange;
+			if(!audio.isPlaying)
+			{
+				audio.Play();
+			}
 		}
 	}
 	
 	if(candyCount == candyBarSize && cooldown == 0.0){
 		cooldown = cooldownTime;
 		transformEnabled = true;
+		audio.clip = candyFull;
+		if(!audio.isPlaying)
+		{
+			audio.Play();
+		}
+		
 	}
 	
 	if(cooldown == 0.0 && transformationIsEndable == true){
@@ -90,6 +119,10 @@ function OnTriggerStay (object:Collider) {
 	if (object.tag == "ChocolateDrop" || object.tag == "GummyDrop" || object.tag == "LollipopDrop") {
 		if (DestroyCandy == true) {
 			object.SendMessage("DestroyCandyDrop");
+			
+			audio.clip = candyPickUp;	
+			audio.Play();
+			
 			DestroyCandy = false;
 			ResetStanding();
 		}
