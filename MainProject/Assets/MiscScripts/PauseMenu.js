@@ -84,7 +84,7 @@ function Update () {
 function OnGUI(){
 
 	if(paused){
-	
+		/*
 		GetComponent.<LockCursor>().enabled = false;
 		
 		GUI.color = Color.white;
@@ -130,7 +130,7 @@ function OnGUI(){
     	
 		
     	//Chocolate Truffle
-    	/*
+    	
     	ChocolateTruffleArray[1] = System.Int32.Parse(ChocolateTruffleStaringDistance);
     	ChocolateTruffle.startingDistance = ChocolateTruffleArray[1];
     	

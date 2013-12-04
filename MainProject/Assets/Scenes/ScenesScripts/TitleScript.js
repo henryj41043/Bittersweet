@@ -1,33 +1,36 @@
 ﻿#pragma strict
-var customSkin: GUISkin;
-//var startButton: GUISkin;
-var startButtonStyle: GUIStyle;
-var InstuctionButtonStyle: GUIStyle;
+var startButtonStyle : GUIStyle;
+var helpButtonStyle : GUIStyle;
+var creditsButtonStyle : GUIStyle;
 
+private var buttonWidth : int = 220;
+private var buttonHeight : int = 80;
 
+private var startButtonX = 350;
+private var startButtonY = 360;
+
+private var helpButtonX = 350;
+private var helpButtonY = 425;
+
+private var creditsButtonX = 350;
+private var creditsButtonY = 490;
 
 function OnGUI () {
-	var buttonWidth: int = 220;
-	var buttonHeight: int = 50;
-	
-	//var halfScreenWidth: float = Screen.width/2;
-	//var halfButtonWidth: float = buttonWidth/2;
-	
-	GUI.skin = customSkin;
-	//GUI.skin = startButton;
-
-	//350,450
-	//start button
-	if(GUI.Button(Rect(350, 380,buttonWidth,buttonHeight),"WorldMap",startButtonStyle))
+	if(GUI.Button(Rect(startButtonX, startButtonY,buttonWidth,buttonHeight),"",startButtonStyle))
 	{
 		Application.LoadLevel("WorldMap");
 	
 	}
-	//Instuction button
-	if(GUI.Button(Rect(350, 450,buttonWidth,buttonHeight),"Instuction1",InstuctionButtonStyle))
+	
+	if(GUI.Button(Rect(helpButtonX, helpButtonY, buttonWidth, buttonHeight),"",helpButtonStyle))
 	{
-		Application.LoadLevel("Instuction1");
+		Application.LoadLevel("Help1");
 	
 	}
 	
+	if(GUI.Button(Rect(creditsButtonX, creditsButtonY, buttonWidth, buttonHeight),"",creditsButtonStyle))
+	{
+		Application.LoadLevel("Credits");
+	
+	}
 }
