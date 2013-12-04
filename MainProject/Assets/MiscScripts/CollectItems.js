@@ -12,6 +12,8 @@ private var inCooldown = false;
 var candyBarGUI : GUITexture;
 private var candyBarGUIWidth = 0.0;
 
+private var transformationIsEndable : boolean;
+
 function Start () {
 	candyBarGUIWidth = candyBarGUI.pixelInset.width;
 }
@@ -23,22 +25,29 @@ function Update () {
 			addCandy();
 			DestroyCandy = true;
 		}
+	
+	if (Input.GetKeyDown("0")){ 
+		candyCount = candyCount + 1.0;
+	}
 		
 	if(transformEnabled){
 		if(Input.GetKeyDown("1")){
 			GetComponent(PlayerControls).CurrentTransformation(1);
 			inCooldown = true;
 			transformEnabled = false;
+			transformationIsEndable = true;
 		}
 		if(Input.GetKeyDown("2")){
 			GetComponent(PlayerControls).CurrentTransformation(2);
 			inCooldown = true;
 			transformEnabled = false;
+			transformationIsEndable = true;
 		}
 		if(Input.GetKeyDown("3")){
 			GetComponent(PlayerControls).CurrentTransformation(3);
 			inCooldown = true;
 			transformEnabled = false;
+			transformationIsEndable = true;
 		}
 	}
 	
@@ -47,9 +56,10 @@ function Update () {
 		transformEnabled = true;
 	}
 	
-	if(cooldown == 0.0){
+	if(cooldown == 0.0 && transformationIsEndable == true){
 		inCooldown = false;
 		GetComponent(PlayerControls).CurrentTransformation(0);
+		transformationIsEndable = false;
 	}
 	
 	updateCandyBarGUI();
