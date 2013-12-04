@@ -3,15 +3,15 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MiscScripts/CollectItems.js">
     <Files>
       <File FileName="Assets/Player/PlayerControls.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/TitleScript.js" Line="22" Column="2" />
-      <File FileName="Assets/Scenes/ScenesScripts/Credits.js" Line="71" Column="3" />
-      <File FileName="Assets/Scenes/ScenesScripts/Help1.js" Line="18" Column="3" />
+      <File FileName="Assets/Scenes/ScenesScripts/TitleScript.js" Line="1" Column="1" />
+      <File FileName="Assets/Scenes/ScenesScripts/Credits.js" Line="1" Column="1" />
+      <File FileName="Assets/Scenes/ScenesScripts/Help1.js" Line="1" Column="1" />
       <File FileName="Assets/Scenes/ScenesScripts/Help2.js" Line="1" Column="1" />
       <File FileName="Assets/Scenes/ScenesScripts/Help3.js" Line="1" Column="1" />
       <File FileName="Assets/Scenes/ScenesScripts/Help4.js" Line="1" Column="1" />
       <File FileName="Assets/Scenes/ScenesScripts/Help5.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/WorldMapScript.js" Line="22" Column="4" />
-      <File FileName="Assets/MiscScripts/CollectItems.js" Line="60" Column="18" />
+      <File FileName="Assets/Scenes/ScenesScripts/WorldMapScript.js" Line="1" Column="1" />
+      <File FileName="Assets/MiscScripts/CollectItems.js" Line="8" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
