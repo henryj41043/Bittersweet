@@ -27,6 +27,7 @@ var ableToRotate : boolean;
 var gravity : float;
 
 var deathDuration : float;
+var hitParticles : ParticleEmitter;
 private var amIDead : boolean;
 
 private var moveDirection : Vector3 = Vector3.zero;
@@ -68,6 +69,7 @@ function Update () {
 }
 
 function AttackWindupPhase () {
+	controller.Move(Vector3(0, gravity, 0) * Time.deltaTime * moveSpeed);
 	BroadcastMessage("PlayMinerAttack");
 	AbleToMove(false);
 	AbleToAttack(false);
@@ -107,8 +109,9 @@ function AbleToRotate (receivedInput : boolean) {
 }
 
 function HitstunImmobilizationPhase(hitstunDuration : float) {
+	hitParticles.Emit(10);
 	BroadcastMessage("PlayMinerRecoil");
-	CancelInvoke("HitstunRecoveryPhase");
+	CancelInvoke();
 	AbleToMove(false);
 	AbleToAttack(false);
 	AbleToRotate(false);
@@ -122,6 +125,7 @@ function HitstunRecoveryPhase () {
 }
 
 function PlayMinerDeath () {
+	Physics.IgnoreCollision(collider, player.collider);
 	amIDead = true;
 	Destroy(gameObject, deathDuration);
 }

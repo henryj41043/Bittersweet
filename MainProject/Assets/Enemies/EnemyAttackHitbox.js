@@ -7,6 +7,7 @@ function OnTriggerEnter (object : Collider) {
 	if (object.tag == "Player") {
 		object.SendMessage("ApplyDamage", damage);
 		object.SendMessage("HitstunImmobilizationPhase", hitstunDuration);
+		DestroySelf();
 	}
 }
 

@@ -25,6 +25,54 @@ var finalHitL0 : int;
 var currentHitL0 : int;
 private var attackFactorL0 : float;
 private var attackingL0 : boolean;
+var hitboxL1 : Rigidbody;
+var baseAttackDamageL1 : float;
+var baseAttackRangeL1 : float;
+var baseAttackDurationL1 : float;
+var baseAttackHitstunDurationL1 : float;
+var attackMovementSpeedL1 : float;
+var attackWindupPeriodL1 : float;
+var attackStrikingPeriodL1 : float;
+var attackCooldownPeriodL1 : float;
+var attackForwardFactorL1 : float;
+var attackBackwardFactorL1 : float;
+var attackSidewaysFactorL1 : float;
+var finalHitL1 : int;
+var currentHitL1 : int;
+private var attackFactorL1 : float;
+private var attackingL1 : boolean;
+var hitboxL2 : Rigidbody;
+var baseAttackDamageL2 : float;
+var baseAttackRangeL2 : float;
+var baseAttackDurationL2 : float;
+var baseAttackHitstunDurationL2 : float;
+var attackMovementSpeedL2 : float;
+var attackWindupPeriodL2 : float;
+var attackStrikingPeriodL2 : float;
+var attackCooldownPeriodL2 : float;
+var attackForwardFactorL2 : float;
+var attackBackwardFactorL2 : float;
+var attackSidewaysFactorL2 : float;
+var finalHitL2 : int;
+var currentHitL2 : int;
+private var attackFactorL2 : float;
+private var attackingL2 : boolean;
+var hitboxL3 : Rigidbody;
+var baseAttackDamageL3 : float;
+var baseAttackRangeL3 : float;
+var baseAttackDurationL3 : float;
+var baseAttackHitstunDurationL3 : float;
+var attackMovementSpeedL3 : float;
+var attackWindupPeriodL3 : float;
+var attackStrikingPeriodL3 : float;
+var attackCooldownPeriodL3 : float;
+var attackForwardFactorL3 : float;
+var attackBackwardFactorL3 : float;
+var attackSidewaysFactorL3 : float;
+var finalHitL3 : int;
+var currentHitL3 : int;
+private var attackFactorL3 : float;
+private var attackingL3 : boolean;
 var hitboxR0 : Rigidbody;
 var baseAttackDamageR0 : float;
 var baseAttackRangeR0 : float;
@@ -50,9 +98,13 @@ private var dodging : boolean;
 var ableToSpecial : boolean;
 
 //Health parameters
-private var amIDead : boolean;
+var amIDead : boolean;
 
 //Other parameters
+var baseMassa : GameObject;
+var chocoMassa : GameObject;
+var gummyMassa : GameObject;
+var lolliMassa : GameObject;
 var playerTransformation : int;
 var gravity : float;
 var ableToRotate : boolean;
@@ -71,6 +123,14 @@ function Start () {
 }
 
 function Update () {
+	if (amIDead == true) {
+		AbleToMove(false);
+		AbleToAttack(false);
+		AbleToDodge(false);
+		AbleToSpecial(false);
+		AbleToRotate(false);
+	}
+	
 	//Receive rotational input from the other object and assign it to myself
 	if (ableToRotate == true) {
 		transform.rotation = cameraTarget.transform.rotation;
@@ -159,29 +219,29 @@ function Update () {
 		if (playerTransformation == 1) {
 			if (Input.GetMouseButtonDown(0)) {
 				if (Input.GetKey(KeyCode.W)) {
-					attackFactorL0 = attackForwardFactorL0;
+					attackFactorL1 = attackForwardFactorL1;
 					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL1();
 				}
 				else if (Input.GetKey(KeyCode.S)) {
-					attackFactorL0 = attackBackwardFactorL0;
+					attackFactorL1 = attackBackwardFactorL1;
 					moveDirection = Vector3(-transform.forward.x, gravity, -transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL1();
 				}
 				else if (Input.GetKey(KeyCode.D)) {
-					attackFactorL0 = attackSidewaysFactorL0;
+					attackFactorL1 = attackSidewaysFactorL1;
 					moveDirection = Vector3(transform.right.x, gravity, transform.right.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL1();
 				}
 				else if (Input.GetKey(KeyCode.A)) {
-					attackFactorL0 = attackSidewaysFactorL0;
+					attackFactorL1 = attackSidewaysFactorL1;
 					moveDirection = Vector3(-transform.right.x, gravity, -transform.right.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL1();
 				}
 				else {
-					attackFactorL0 = attackForwardFactorL0;
+					attackFactorL1 = attackForwardFactorL1;
 					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL1();
 				}
 			}
 			if (Input.GetMouseButtonDown(1)) {
@@ -192,29 +252,29 @@ function Update () {
 		if (playerTransformation == 2) {
 			if (Input.GetMouseButtonDown(0)) {
 				if (Input.GetKey(KeyCode.W)) {
-					attackFactorL0 = attackForwardFactorL0;
+					attackFactorL2 = attackForwardFactorL2;
 					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL2();
 				}
 				else if (Input.GetKey(KeyCode.S)) {
-					attackFactorL0 = attackBackwardFactorL0;
+					attackFactorL2 = attackBackwardFactorL2;
 					moveDirection = Vector3(-transform.forward.x, gravity, -transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL2();
 				}
 				else if (Input.GetKey(KeyCode.D)) {
-					attackFactorL0 = attackSidewaysFactorL0;
+					attackFactorL2 = attackSidewaysFactorL2;
 					moveDirection = Vector3(transform.right.x, gravity, transform.right.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL2();
 				}
 				else if (Input.GetKey(KeyCode.A)) {
-					attackFactorL0 = attackSidewaysFactorL0;
+					attackFactorL2 = attackSidewaysFactorL2;
 					moveDirection = Vector3(-transform.right.x, gravity, -transform.right.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL2();
 				}
 				else {
-					attackFactorL0 = attackForwardFactorL0;
+					attackFactorL2 = attackForwardFactorL2;
 					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL2();
 				}
 			}
 			if (Input.GetMouseButtonDown(1)) {
@@ -225,29 +285,29 @@ function Update () {
 		if (playerTransformation == 3) {
 			if (Input.GetMouseButtonDown(0)) {
 				if (Input.GetKey(KeyCode.W)) {
-					attackFactorL0 = attackForwardFactorL0;
+					attackFactorL3 = attackForwardFactorL3;
 					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL3();
 				}
 				else if (Input.GetKey(KeyCode.S)) {
-					attackFactorL0 = attackBackwardFactorL0;
+					attackFactorL3 = attackBackwardFactorL3;
 					moveDirection = Vector3(-transform.forward.x, gravity, -transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL3();
 				}
 				else if (Input.GetKey(KeyCode.D)) {
-					attackFactorL0 = attackSidewaysFactorL0;
+					attackFactorL3 = attackSidewaysFactorL3;
 					moveDirection = Vector3(transform.right.x, gravity, transform.right.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL3();
 				}
 				else if (Input.GetKey(KeyCode.A)) {
-					attackFactorL0 = attackSidewaysFactorL0;
+					attackFactorL3 = attackSidewaysFactorL3;
 					moveDirection = Vector3(-transform.right.x, gravity, -transform.right.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL3();
 				}
 				else {
-					attackFactorL0 = attackForwardFactorL0;
+					attackFactorL3 = attackForwardFactorL3;
 					moveDirection = Vector3(transform.forward.x, gravity, transform.forward.z);
-					AttackWindupPhaseL0();
+					AttackWindupPhaseL3();
 				}
 			}
 			if (Input.GetMouseButtonDown(1)) {
@@ -258,6 +318,18 @@ function Update () {
 	
 	if (attackingL0 == true) {
 		controller.Move(moveDirection * attackMovementSpeedL0 * attackFactorL0 * Time.deltaTime);
+	}
+	
+	if (attackingL1 == true) {
+		controller.Move(moveDirection * attackMovementSpeedL1 * attackFactorL1 * Time.deltaTime);
+	}
+	
+	if (attackingL2 == true) {
+		controller.Move(moveDirection * attackMovementSpeedL2 * attackFactorL2 * Time.deltaTime);
+	}
+	
+	if (attackingL3 == true) {
+		controller.Move(moveDirection * attackMovementSpeedL3 * attackFactorL3 * Time.deltaTime);
 	}
 	
 	//Dodge input
@@ -297,21 +369,13 @@ function Update () {
 	if (ableToSpecial == true) {
 		
 	}
-	
-	if (amIDead == true) {
-		AbleToMove(false);
-		AbleToAttack(false);
-		AbleToDodge(false);
-		AbleToSpecial(false);
-		AbleToRotate(false);
-	}
 }
 
 //Movement functions
 
 //Attack functions
 function AttackWindupPhaseL0 () {
-	CountCurrentHit();
+	CountCurrentHitL0();
 	if (currentHitL0 == 1) {
 		BroadcastMessage("PlayMassaAttack1");
 	}
@@ -339,7 +403,7 @@ function AttackStrikingPhaseL0 () {
 	hitboxL0.SendMessage("HitstunDuration", baseAttackHitstunDurationL0);
 	if (currentHitL0 == finalHitL0) {
 		hitboxL0.SendMessage("FinalHit");
-		currentHitL0 = 0;
+		ResetCurrentHit();
 	}
 	Invoke("AttackCooldownPhaseL0", attackStrikingPeriodL0);
 }
@@ -349,6 +413,146 @@ function AttackCooldownPhaseL0 () {
 }
 
 function AttackEndPhaseL0 () {
+	AbleToMove(true);
+	AbleToAttack(true);
+	AbleToDodge(true);
+	AbleToSpecial(true);	
+	AbleToRotate(true);
+}
+
+function AttackWindupPhaseL1 () {
+	CountCurrentHitL1();
+	if (currentHitL1 == 1) {
+		BroadcastMessage("PlayMassaAttack1");
+	}
+	if (currentHitL1 == 2) {
+		BroadcastMessage("PlayMassaAttack2");
+	}
+	if (currentHitL1 == 3) {
+		BroadcastMessage("PlayMassaAttack3");
+	}
+	AbleToMove(false);
+	AbleToAttack(false);
+	AbleToDodge(false);
+	AbleToSpecial(false);
+	AbleToRotate(false);
+	attackingL1 = true;
+	Invoke("AttackStrikingPhaseL1", attackWindupPeriodL1);
+}
+
+function AttackStrikingPhaseL1 () {
+	attackingL1 = false;
+	var hitboxL1 : Rigidbody = Instantiate(hitboxL1, transform.position, transform.rotation);
+	hitboxL1.velocity = transform.TransformDirection(Vector3(0, 0, baseAttackRangeL1));
+	hitboxL1.SendMessage("Damage", baseAttackDamageL1);
+	hitboxL1.SendMessage("Duration", baseAttackDurationL1);
+	hitboxL1.SendMessage("HitstunDuration", baseAttackHitstunDurationL1);
+	hitboxL1.SendMessage("StrikeAnimation", currentHitL1);
+	if (currentHitL1 == finalHitL1) {
+		hitboxL1.SendMessage("FinalHit");
+		ResetCurrentHit();
+	}
+	Invoke("AttackCooldownPhaseL1", attackStrikingPeriodL1);
+}
+
+function AttackCooldownPhaseL1 () {
+	Invoke("AttackEndPhaseL1", attackCooldownPeriodL1);
+}
+
+function AttackEndPhaseL1 () {
+	AbleToMove(true);
+	AbleToAttack(true);
+	AbleToDodge(true);
+	AbleToSpecial(true);	
+	AbleToRotate(true);
+}
+
+function AttackWindupPhaseL2 () {
+	CountCurrentHitL2();
+	if (currentHitL2 == 1) {
+		BroadcastMessage("PlayMassaAttack1");
+	}
+	if (currentHitL2 == 2) {
+		BroadcastMessage("PlayMassaAttack2");
+	}
+	if (currentHitL2 == 3) {
+		BroadcastMessage("PlayMassaAttack3");	
+	}
+	AbleToMove(false);
+	AbleToAttack(false);
+	AbleToDodge(false);
+	AbleToSpecial(false);
+	AbleToRotate(false);
+	attackingL2 = true;
+	Invoke("AttackStrikingPhaseL2", attackWindupPeriodL2);
+}
+
+function AttackStrikingPhaseL2 () {
+	attackingL2 = false;
+	var hitboxL2 : Rigidbody = Instantiate(hitboxL2, transform.position, transform.rotation);
+	hitboxL2.velocity = transform.TransformDirection(Vector3(0, 0, baseAttackRangeL2));
+	hitboxL2.SendMessage("Damage", baseAttackDamageL2);
+	hitboxL2.SendMessage("Duration", baseAttackDurationL2);
+	hitboxL2.SendMessage("HitstunDuration", baseAttackHitstunDurationL2);
+	if (currentHitL2 == finalHitL2) {
+		hitboxL2.SendMessage("FinalHit");
+		ResetCurrentHit();
+	}
+	Invoke("AttackCooldownPhaseL2", attackStrikingPeriodL2);
+}
+
+function AttackCooldownPhaseL2 () {
+	Invoke("AttackEndPhaseL2", attackCooldownPeriodL2);
+}
+
+function AttackEndPhaseL2 () {
+	AbleToMove(true);
+	AbleToAttack(true);
+	AbleToDodge(true);
+	AbleToSpecial(true);	
+	AbleToRotate(true);
+}
+
+function AttackWindupPhaseL3 () {
+	CountCurrentHitL3();
+	if (currentHitL3 == 1) {
+		BroadcastMessage("PlayMassaAttack1");
+	}
+	if (currentHitL3 == 2) {
+		BroadcastMessage("PlayMassaAttack2");
+	}
+	if (currentHitL3 == 3) {
+		BroadcastMessage("PlayMassaAttack3");	
+	}
+	AbleToMove(false);
+	AbleToAttack(false);
+	AbleToDodge(false);
+	AbleToSpecial(false);
+	AbleToRotate(false);
+	attackingL3 = true;
+	Invoke("AttackStrikingPhaseL3", attackWindupPeriodL3);
+}
+
+function AttackStrikingPhaseL3 () {
+	attackingL3 = false;
+	var hitboxL3 : Rigidbody = Instantiate(hitboxL3, transform.position + (transform.forward * 1), transform.rotation);
+	hitboxL3.velocity = transform.TransformDirection(Vector3(0, 0, baseAttackRangeL3));
+	hitboxL3.SendMessage("Damage", baseAttackDamageL3);
+	hitboxL3.SendMessage("Duration", baseAttackDurationL3);
+	hitboxL3.SendMessage("HitstunDuration", baseAttackHitstunDurationL3);
+	hitboxL3.SendMessage("StrikeAnimation", currentHitL3);
+	if (currentHitL3 == finalHitL3) {
+		hitboxL3.SendMessage("FinalHit");
+		ResetCurrentHit();
+	}
+	Invoke("AttackCooldownPhaseL3", attackStrikingPeriodL3);
+}
+
+function AttackCooldownPhaseL3 () {
+	Invoke("AttackEndPhaseL3", attackCooldownPeriodL3);
+}
+
+function AttackEndPhaseL3 () {
 	AbleToMove(true);
 	AbleToAttack(true);
 	AbleToDodge(true);
@@ -387,10 +591,35 @@ function AttackEndPhaseR0 () {
 	AbleToRotate(true);
 }
 
-function CountCurrentHit () {
+function CountCurrentHitL0 () {
 	if (currentHitL0 < finalHitL0) {
 		currentHitL0 += 1;
 	}
+}
+
+function CountCurrentHitL1 () {
+	if (currentHitL1 < finalHitL1) {
+		currentHitL1 += 1;
+	}
+}
+
+function CountCurrentHitL2 () {
+	if (currentHitL2 < finalHitL2) {
+		currentHitL2 += 1;
+	}
+}
+
+function CountCurrentHitL3 () {
+	if (currentHitL3 < finalHitL3) {
+		currentHitL3 += 1;
+	}
+}
+
+function ResetCurrentHit () {
+	currentHitL0 = 0;
+	currentHitL1 = 0;
+	currentHitL2 = 0;
+	currentHitL3 = 0;
 }
 
 //Dodge functions
@@ -429,8 +658,10 @@ function DodgeEndPhase () {
 
 //Health functions
 function HitstunImmobilizationPhase(hitstunDuration : float) {
+	ResetCurrentHit();
+	cameraTarget.SendMessage("CameraShake", hitstunDuration);
 	BroadcastMessage("PlayMassaRecoil");
-	CancelInvoke("HitstunRecoveryPhase");
+	CancelInvoke();
 	AbleToMove(false);
 	AbleToAttack(false);
 	AbleToDodge(false);
@@ -447,7 +678,7 @@ function HitstunRecoveryPhase () {
 	AbleToRotate(true);
 }
 
-function PlayDeath () {
+function PlayMassaDeath () {
 	amIDead = true;
 }
 
@@ -473,5 +704,50 @@ function AbleToRotate (receivedInput : boolean) {
 }
 
 function CurrentTransformation (receivedInput : int) {
+	ResetCurrentHit();
+	/*AbleToMove(false);
+	AbleToAttack(false);
+	AbleToDodge(false);
+	AbleToSpecial(false);
+	AbleToRotate(false);*/
 	playerTransformation = receivedInput;
+	if (receivedInput == 1) {
+		baseMassa.SetActive(false);
+		chocoMassa.SetActive(true);
+		gummyMassa.SetActive(false);
+		lolliMassa.SetActive(false);
+		BroadcastMessage("PlayMassaChocoTransform");
+	}
+	if (receivedInput == 2) {
+		baseMassa.SetActive(false);
+		chocoMassa.SetActive(false);
+		gummyMassa.SetActive(true);
+		lolliMassa.SetActive(false);
+		BroadcastMessage("PlayMassaGummyTransform");
+	}
+	if (receivedInput == 3) {
+		baseMassa.SetActive(false);
+		chocoMassa.SetActive(false);
+		gummyMassa.SetActive(false);
+		lolliMassa.SetActive(true);
+		BroadcastMessage("PlayMassaLolliTransform");
+	}
+	if (receivedInput == 0) {
+		baseMassa.SetActive(true);
+		chocoMassa.SetActive(false);
+		gummyMassa.SetActive(false);
+		lolliMassa.SetActive(false);
+	}
+}
+
+function TransformationBlast () {
+
+}
+
+function TransformationEnd () {
+	AbleToMove(true);
+	AbleToAttack(true);
+	AbleToDodge(true);
+	AbleToSpecial(true);	
+	AbleToRotate(true);
 }

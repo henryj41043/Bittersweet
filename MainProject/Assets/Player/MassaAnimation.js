@@ -9,9 +9,26 @@ var dodge : AudioClip;
 var death : AudioClip;
 var recoil : AudioClip;
 
+function PlayMassaChocoTransform() {
+	if (!animation.IsPlaying("Death")) {
+		animation.Play("ChocoTransform");
+	}
+}
+
+function PlayMassaGummyTransform() {
+	if (!animation.IsPlaying("Death")) {
+		animation.Play("GummyTransform");
+	}
+}
+
+function PlayMassaLolliTransform() {
+	if (!animation.IsPlaying("Death")) {
+		animation.Play("LolliTransform");
+	}
+}
 
 function PlayMassaIdle() {
-	if (!animation.IsPlaying("Death")) {
+	if (!animation.IsPlaying("Death") && !animation.IsPlaying("ChocoTransform") && !animation.IsPlaying("GummyTransform") && !animation.IsPlaying("LolliTransform")) {
 		animation.Play("Idle");
 		audio.clip = idle;
 		audio.Play();

@@ -30,6 +30,7 @@ var ableToRotate : boolean;
 var gravity : float;
 
 var deathDuration : float;
+var hitParticles : ParticleEmitter;
 private var amIDead : boolean;
 
 private var moveDirection : Vector3 = Vector3.zero;
@@ -71,6 +72,7 @@ function Update () {
 }
 
 function AttackWindupPhase () {
+	controller.Move(Vector3(0, gravity, 0) * Time.deltaTime * moveSpeed);
 	BroadcastMessage("PlayGentAttack");
 	AbleToMove(false);
 	AbleToAttack(false);
@@ -110,18 +112,19 @@ function AbleToRotate (receivedInput : boolean) {
 }
 
 function HitstunImmobilizationPhase(hitstunDuration : float) {
-        Debug.Log("Gent Hitstun");
-        CancelInvoke("HitstunRecoveryPhase");
-        AbleToMove(false);
-        AbleToAttack(false);
-        AbleToRotate(false);
-        if (hitstunDuration > minimumHitstunDuration) {
-                Invoke("HitstunRecoveryPhase", hitstunDuration * hitstunReduction);
-                BroadcastMessage("PlayGentHitstun");
-        }
-        else {
-                Invoke("HitstunRecoveryPhase", 0);
-        }
+	hitParticles.Emit(10);
+	Debug.Log("Gent Hitstun");
+	CancelInvoke();
+	AbleToMove(false);
+	AbleToAttack(false);
+	AbleToRotate(false);
+	if (hitstunDuration > minimumHitstunDuration) {
+		Invoke("HitstunRecoveryPhase", hitstunDuration * hitstunReduction);
+		BroadcastMessage("PlayGentHitstun");
+	}
+	else {
+		Invoke("HitstunRecoveryPhase", 0.00);
+	}
 }
 
 function HitstunRecoveryPhase () {
@@ -131,6 +134,7 @@ function HitstunRecoveryPhase () {
 }
 
 function PlayGentDeath () {
+	Physics.IgnoreCollision(collider, player.collider);
 	amIDead = true;
 	Destroy(gameObject, deathDuration);
 }
