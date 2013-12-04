@@ -3,9 +3,9 @@ var NextStyle: GUIStyle;
 var BackStyle: GUIStyle;
 private var buttonWidth: int = 97;
 private var buttonHeight: int = 66;
-private var nextX = 800;
+private var nextX = 645;
 private var nextY = 515;
-private var backX = 75;
+private var backX = 55;
 private var backY = 515;
 
 
