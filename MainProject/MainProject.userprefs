@@ -1,17 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MiscScripts/CollectItems.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Player/PlayerControls.js">
     <Files>
-      <File FileName="Assets/Player/PlayerControls.js" Line="1" Column="1" />
+      <File FileName="Assets/Player/PlayerControls.js" Line="134" Column="23" />
       <File FileName="Assets/Scenes/ScenesScripts/TitleScript.js" Line="1" Column="1" />
       <File FileName="Assets/Scenes/ScenesScripts/Credits.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/Help1.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/Help2.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/Help3.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/Help4.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/Help5.js" Line="1" Column="1" />
-      <File FileName="Assets/Scenes/ScenesScripts/WorldMapScript.js" Line="1" Column="1" />
-      <File FileName="Assets/MiscScripts/CollectItems.js" Line="8" Column="30" />
+      <File FileName="Assets/MiscScripts/CandyDrop.js" Line="10" Column="2" />
+      <File FileName="Assets/Player/PlayerHealth.js" Line="1" Column="1" />
+      <File FileName="Assets/MiscScripts/Restart.js" Line="10" Column="3" />
+      <File FileName="Assets/MiscScripts/PauseMenu.js" Line="77" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
