@@ -5,7 +5,8 @@ Put this on a GameObject unattached to anything. Replace the Input.GetKeyDown wi
 #pragma strict
 
 function Update () {
-	if (Input.GetKeyDown (KeyCode.Return)) { 
+	if (Input.GetKeyDown (KeyCode.Return)) {
+		Screen.lockCursor = false; 
 		Application.LoadLevel("WorldMap"); 
 	}
 }
