@@ -19,10 +19,21 @@ function OnGUI () {
 	if(GUI.Button(Rect(lollipopLevel1X, lollipopLevel1Y, dotWidth, dotHeight), "", lollipopLevel1Style))
 	{
 		Application.LoadLevel("Main");
+		var gameMusic : GameObject = GameObject.Find("GameMusic");
+	    if (gameMusic) {
+	        // kill game music
+	        Destroy(gameMusic);
+	    }
+		
 	}
 	
 	if(GUI.Button(Rect(backX, backY, backWidth, backHeight), "", backStyle))
 	{
 		Application.LoadLevel("TitleScene");
+		var menuMusic : GameObject = GameObject.Find("MenuMusic");
+	    if (menuMusic) {
+	        // kill menu music
+	        Destroy(menuMusic);
+	    }
 	}
 }
