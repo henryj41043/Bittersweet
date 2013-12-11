@@ -8,7 +8,7 @@ private var candyBarSize = 5.0;
 private var cooldownTime = 10.0;
 private var cooldown = 0.0;
 private var candyCount = 0.0;
-private var inCooldown = false;
+public var inCooldown = false;
 var candyBarGUI : GUITexture;
 var candyPickUp : AudioClip;
 var candyFull : AudioClip;
@@ -38,7 +38,6 @@ function Update () {
 	if(transformEnabled){
 		if(Input.GetKeyDown("1")){
 			GetComponent(PlayerControls).CurrentTransformation(1);
-			inCooldown = true;
 			transformEnabled = false;
 			transformationIsEndable = true;
 			
@@ -50,7 +49,6 @@ function Update () {
 		}
 		if(Input.GetKeyDown("2")){
 			GetComponent(PlayerControls).CurrentTransformation(2);
-			inCooldown = true;
 			transformEnabled = false;
 			transformationIsEndable = true;
 			
@@ -62,7 +60,6 @@ function Update () {
 		}
 		if(Input.GetKeyDown("3")){
 			GetComponent(PlayerControls).CurrentTransformation(3);
-			inCooldown = true;
 			transformEnabled = false;
 			transformationIsEndable = true;
 			

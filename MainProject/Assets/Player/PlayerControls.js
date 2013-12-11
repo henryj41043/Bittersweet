@@ -793,7 +793,8 @@ function CurrentTransformation (receivedInput : int) {
 			BroadcastMessage("PlayMassaChocoTransform");
 			yield WaitForSeconds(transformationTime);
 			EnableAll();	
-			SendMessage("AbleToTakeDamage");	
+			SendMessage("AbleToTakeDamage");
+			GetComponent(CollectItems).inCooldown = true;	
 		}
 		if (receivedInput == 2) {
 			TransformationBlast(2);
@@ -804,7 +805,8 @@ function CurrentTransformation (receivedInput : int) {
 			BroadcastMessage("PlayMassaGummyTransform");
 			yield WaitForSeconds(transformationTime);
 			EnableAll();	
-			SendMessage("AbleToTakeDamage");	
+			SendMessage("AbleToTakeDamage");
+			GetComponent(CollectItems).inCooldown = true;
 		}
 		if (receivedInput == 3) {
 			TransformationBlast(3);
@@ -815,7 +817,8 @@ function CurrentTransformation (receivedInput : int) {
 			BroadcastMessage("PlayMassaLolliTransform");
 			yield WaitForSeconds(transformationTime);
 			EnableAll();	
-			SendMessage("AbleToTakeDamage");	
+			SendMessage("AbleToTakeDamage");
+			GetComponent(CollectItems).inCooldown = true;	
 		}
 		if (receivedInput == 0) {
 			baseMassa.SetActive(true);
