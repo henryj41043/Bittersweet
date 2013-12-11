@@ -48,7 +48,7 @@ private var windowRect : Rect;
 	
 function Die () {
 	BroadcastMessage("PlayMassaDeath");
-	//Destroy(this.gameObject);
+	Invoke("loadLoseScreen",3);
 }
 
 function ModifyHearts(lostHearts : int){
@@ -61,8 +61,9 @@ function ModifyHearts(lostHearts : int){
     }
 }
 
-function Restart () {
-	Application.LoadLevel(0);
+function loadLoseScreen() {
+	Screen.lockCursor = false;
+	Application.LoadLevel("Lose");
 }
 
 function AbleToTakeDamage () {

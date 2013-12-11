@@ -1,6 +1,4 @@
 ﻿#pragma strict
-var loseScreen : GUITexture;
-
 //Movement parameters
 var ableToMove : boolean;
 var moveSpeed : float;
@@ -125,7 +123,6 @@ private var moveDirection : Vector3 = Vector3.zero;
 private var controller : CharacterController;
 
 function Start () {
-	loseScreen.enabled = false;
 	amIDead = false;
 	AbleToMove(true);
 	AbleToAttack(true);
@@ -142,7 +139,6 @@ function Update () {
 		AbleToDodge(false);
 		AbleToSpecial(false);
 		AbleToRotate(false);
-		//loseScreen.enabled = true;
 	}
 	
 	//Receive rotational input from the other object and assign it to myself
