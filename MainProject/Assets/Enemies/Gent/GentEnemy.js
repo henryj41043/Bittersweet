@@ -137,8 +137,11 @@ function HitstunRecoveryPhase () {
 }
 
 function PlayGentDeath () {
-	hitParticles.Emit(10);
-	Physics.IgnoreCollision(collider, player.collider);
-	amIDead = true;
-	Destroy(gameObject, deathDuration);
+	if(amIDead == false){
+		hitParticles.Emit(10);
+		Physics.IgnoreCollision(collider, player.collider);
+		Destroy(gameObject, deathDuration);
+		GameObject.Find("GameManager").SendMessage("enemyDeath");
+		amIDead = true;
+	}
 }
