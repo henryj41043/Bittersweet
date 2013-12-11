@@ -7,10 +7,12 @@ var manager : GameObject;
 private var candyDrop : int;
 
 var maximumHealth : int;
+var ableToDrop : boolean;
 private var currentHealth : int;
 
 function Start () {
 	currentHealth = maximumHealth;
+	ableToDrop = true;
 }
 
 function ApplyDamage (damage : int) {
@@ -23,17 +25,24 @@ function ApplyDamage (damage : int) {
 function KillSelf() {
 	BroadcastMessage("PlayMinerDeath");
 	DropCandy();
+	Invoke("PreventDropCandy", 0.1);
 }
 
 function DropCandy() {
 	candyDrop = Random.Range(1, 4);
-	if (candyDrop == 1) {
-		Instantiate(chocolateDrop, transform.position, transform.rotation);
+	if (ableToDrop == true) {
+		if (candyDrop == 1) {
+			Instantiate(chocolateDrop, transform.position, transform.rotation);
+		}
+		if (candyDrop == 2) {
+			Instantiate(gummyDrop, transform.position, transform.rotation);
+		}
+		if (candyDrop == 3) {
+			Instantiate(lollipopDrop, transform.position, transform.rotation);
+		}
 	}
-	if (candyDrop == 2) {
-		Instantiate(gummyDrop, transform.position, transform.rotation);
-	}
-	if (candyDrop == 3) {
-		Instantiate(lollipopDrop, transform.position, transform.rotation);
-	}
+}
+
+function PreventDropCandy () {
+	ableToDrop = false;
 }

@@ -1,4 +1,6 @@
 ﻿#pragma strict
+var loseScreen : GUITexture;
+
 //Movement parameters
 var ableToMove : boolean;
 var moveSpeed : float;
@@ -39,6 +41,7 @@ var attackBackwardFactorL1 : float;
 var attackSidewaysFactorL1 : float;
 var finalHitL1 : int;
 var currentHitL1 : int;
+var MeltyTruffleTime : float;
 private var attackFactorL1 : float;
 private var attackingL1 : boolean;
 var hitboxL2 : Rigidbody;
@@ -55,6 +58,7 @@ var attackBackwardFactorL2 : float;
 var attackSidewaysFactorL2 : float;
 var finalHitL2 : int;
 var currentHitL2 : int;
+var StickySlideTime : float;
 private var attackFactorL2 : float;
 private var attackingL2 : boolean;
 var hitboxL3 : Rigidbody;
@@ -71,6 +75,7 @@ var attackBackwardFactorL3 : float;
 var attackSidewaysFactorL3 : float;
 var finalHitL3 : int;
 var currentHitL3 : int;
+var TruffleFragTime : float;
 private var attackFactorL3 : float;
 private var attackingL3 : boolean;
 var hitboxR0 : Rigidbody;
@@ -99,6 +104,9 @@ var ableToSpecial : boolean;
 
 //Health parameters
 var amIDead : boolean;
+var PlayerHealth : PlayerHealth;
+var knockbackSpeed : Vector3;
+var knockbacking : boolean;
 
 //Other parameters
 var baseMassa : GameObject;
@@ -106,6 +114,10 @@ var chocoMassa : GameObject;
 var gummyMassa : GameObject;
 var lolliMassa : GameObject;
 var playerTransformation : int;
+var transformationTime : float;
+var blastChocolate : GameObject;
+var blastGummy : GameObject;
+var blastLollipop : GameObject;
 var gravity : float;
 var ableToRotate : boolean;
 var cameraTarget : GameObject;
@@ -113,6 +125,7 @@ private var moveDirection : Vector3 = Vector3.zero;
 private var controller : CharacterController;
 
 function Start () {
+	loseScreen.enabled = false;
 	amIDead = false;
 	AbleToMove(true);
 	AbleToAttack(true);
@@ -129,6 +142,7 @@ function Update () {
 		AbleToDodge(false);
 		AbleToSpecial(false);
 		AbleToRotate(false);
+		//loseScreen.enabled = true;
 	}
 	
 	//Receive rotational input from the other object and assign it to myself
@@ -246,6 +260,9 @@ function Update () {
 			}
 			if (Input.GetMouseButtonDown(1)) {
 				GetComponentInChildren(MeltyTruffle).MeltyTruffle();
+				DisableAll();
+				BroadcastMessage("PlayMassaSpecial");
+				Invoke("EnableAll", MeltyTruffleTime);
 			}
 		}
 		
@@ -279,6 +296,9 @@ function Update () {
 			}
 			if (Input.GetMouseButtonDown(1)) {
 				GetComponentInChildren(StickySlide).StickySlide();
+				DisableAll();
+				BroadcastMessage("PlayMassaSpecial");
+				Invoke("EnableAll", StickySlideTime);
 			}
 		}
 		
@@ -312,6 +332,9 @@ function Update () {
 			}
 			if (Input.GetMouseButtonDown(1)) {
 				GetComponentInChildren(TruffleFrag).TruffleFrag();
+				DisableAll();
+				BroadcastMessage("PlayMassaSpecial");
+				Invoke("EnableAll", TruffleFragTime);
 			}
 		}
 	}
@@ -368,6 +391,10 @@ function Update () {
 	//Special input
 	if (ableToSpecial == true) {
 		
+	}
+	
+	if (knockbacking == true) {
+		controller.Move(Vector3(knockbackSpeed.x, gravity, knockbackSpeed.z) * Time.deltaTime);	
 	}
 }
 
@@ -658,16 +685,24 @@ function DodgeEndPhase () {
 
 //Health functions
 function HitstunImmobilizationPhase(hitstunDuration : float) {
-	ResetCurrentHit();
-	cameraTarget.SendMessage("CameraShake", hitstunDuration);
-	BroadcastMessage("PlayMassaRecoil");
-	CancelInvoke();
-	AbleToMove(false);
-	AbleToAttack(false);
-	AbleToDodge(false);
-	AbleToSpecial(false);
-	AbleToRotate(false);
-	Invoke("HitstunRecoveryPhase", hitstunDuration);
+	if (PlayerHealth.ableToTakeDamage == true) {
+		ResetCurrentHit();
+		dodging = false;
+		attackingL0 = false;
+		attackingL1 = false;
+		attackingL2 = false;
+		attackingL3 = false;
+		cameraTarget.SendMessage("CameraShake", hitstunDuration);
+		BroadcastMessage("PlayMassaRecoil");
+		CancelInvoke();
+		AbleToMove(false);
+		AbleToAttack(false);
+		AbleToDodge(false);
+		AbleToSpecial(false);
+		AbleToRotate(false);
+		SendMessage("UnableToTakeDamage");
+		Invoke("HitstunRecoveryPhase", hitstunDuration);
+	}
 }
 
 function HitstunRecoveryPhase () {
@@ -676,6 +711,30 @@ function HitstunRecoveryPhase () {
 	AbleToDodge(true);
 	AbleToSpecial(true);	
 	AbleToRotate(true);
+	SendMessage("AbleToTakeDamage");
+}
+
+function KnockbackMovementPhase(receivedKnockbackSpeed : Vector3) {
+	knockbacking = true;
+	knockbackSpeed = receivedKnockbackSpeed;
+}
+
+function KnockbackDuration (receivedKnockbackDuration : float){
+	AbleToMove(false);
+	AbleToAttack(false);
+	AbleToDodge(false);
+	AbleToSpecial(false);
+	AbleToRotate(false);
+	Invoke("KnockbackRecoveryPhase", receivedKnockbackDuration);
+}
+
+function KnockbackRecoveryPhase () {
+	knockbacking = false;
+	AbleToMove(true);
+	AbleToAttack(true);
+	AbleToDodge(true);
+	AbleToSpecial(true);	
+	AbleToRotate(true);	
 }
 
 function PlayMassaDeath () {
@@ -703,45 +762,82 @@ function AbleToRotate (receivedInput : boolean) {
 	ableToRotate = receivedInput;
 }
 
+function DisableAll () {
+	ableToMove = false;
+	ableToAttack = false;
+	ableToDodge = false;
+	ableToSpecial = false;
+	ableToRotate = false;
+}
+
+function EnableAll () {
+	ableToMove = true;
+	ableToAttack = true;
+	ableToDodge = true;
+	ableToSpecial = true;
+	ableToRotate = true;
+}
+
 function CurrentTransformation (receivedInput : int) {
-	ResetCurrentHit();
-	/*AbleToMove(false);
-	AbleToAttack(false);
-	AbleToDodge(false);
-	AbleToSpecial(false);
-	AbleToRotate(false);*/
-	playerTransformation = receivedInput;
-	if (receivedInput == 1) {
-		baseMassa.SetActive(false);
-		chocoMassa.SetActive(true);
-		gummyMassa.SetActive(false);
-		lolliMassa.SetActive(false);
-		BroadcastMessage("PlayMassaChocoTransform");
-	}
-	if (receivedInput == 2) {
-		baseMassa.SetActive(false);
-		chocoMassa.SetActive(false);
-		gummyMassa.SetActive(true);
-		lolliMassa.SetActive(false);
-		BroadcastMessage("PlayMassaGummyTransform");
-	}
-	if (receivedInput == 3) {
-		baseMassa.SetActive(false);
-		chocoMassa.SetActive(false);
-		gummyMassa.SetActive(false);
-		lolliMassa.SetActive(true);
-		BroadcastMessage("PlayMassaLolliTransform");
-	}
-	if (receivedInput == 0) {
-		baseMassa.SetActive(true);
-		chocoMassa.SetActive(false);
-		gummyMassa.SetActive(false);
-		lolliMassa.SetActive(false);
+	if (amIDead == false) {
+		ResetCurrentHit();
+		DisableAll();
+		SendMessage("UnableToTakeDamage");
+		playerTransformation = receivedInput;
+		if (receivedInput == 1) {
+			TransformationBlast(1);
+			baseMassa.SetActive(false);
+			chocoMassa.SetActive(true);
+			gummyMassa.SetActive(false);
+			lolliMassa.SetActive(false);
+			BroadcastMessage("PlayMassaChocoTransform");
+			yield WaitForSeconds(transformationTime);
+			EnableAll();	
+			SendMessage("AbleToTakeDamage");	
+		}
+		if (receivedInput == 2) {
+			TransformationBlast(2);
+			baseMassa.SetActive(false);
+			chocoMassa.SetActive(false);
+			gummyMassa.SetActive(true);
+			lolliMassa.SetActive(false);
+			BroadcastMessage("PlayMassaGummyTransform");
+			yield WaitForSeconds(transformationTime);
+			EnableAll();	
+			SendMessage("AbleToTakeDamage");	
+		}
+		if (receivedInput == 3) {
+			TransformationBlast(3);
+			baseMassa.SetActive(false);
+			chocoMassa.SetActive(false);
+			gummyMassa.SetActive(false);
+			lolliMassa.SetActive(true);
+			BroadcastMessage("PlayMassaLolliTransform");
+			yield WaitForSeconds(transformationTime);
+			EnableAll();	
+			SendMessage("AbleToTakeDamage");	
+		}
+		if (receivedInput == 0) {
+			baseMassa.SetActive(true);
+			chocoMassa.SetActive(false);
+			gummyMassa.SetActive(false);
+			lolliMassa.SetActive(false);
+			EnableAll();	
+			SendMessage("AbleToTakeDamage");	
+		}
 	}
 }
 
-function TransformationBlast () {
-
+function TransformationBlast (receivedBlast : int) {
+	if (receivedBlast == 1) {
+		Instantiate(blastChocolate, transform.position, transform.rotation);
+	}
+	if (receivedBlast == 2) {
+		Instantiate(blastGummy, transform.position, transform.rotation);	
+	}
+	if (receivedBlast == 3) {
+		Instantiate(blastLollipop, transform.position, transform.rotation);	
+	}
 }
 
 function TransformationEnd () {

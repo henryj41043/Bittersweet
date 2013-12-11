@@ -15,6 +15,7 @@ var moveSpeed : float;
 
 var ableToAttack : boolean;
 var hitbox : Rigidbody;
+var hitboxInstantiated : Rigidbody;
 var baseAttackDamage : float;
 var baseAttackRange : float;
 var baseAttackDuration : float;
@@ -31,7 +32,7 @@ var gravity : float;
 
 var deathDuration : float;
 var hitParticles : ParticleEmitter;
-private var amIDead : boolean;
+var amIDead : boolean;
 
 private var moveDirection : Vector3 = Vector3.zero;
 private var controller : CharacterController;
@@ -81,11 +82,11 @@ function AttackWindupPhase () {
 }
 
 function AttackStrikingPhase () {
-	var hitbox : Rigidbody = Instantiate(hitbox, transform.position, transform.rotation);
-	hitbox.velocity = transform.TransformDirection(Vector3(0, 0, baseAttackRange));
-	hitbox.SendMessage("Damage", baseAttackDamage);
-	hitbox.SendMessage("Duration", baseAttackDuration);
-	hitbox.SendMessage("HitstunDuration", baseAttackHitstunDuration);
+	hitboxInstantiated = Instantiate(hitbox, transform.position + (transform.forward * 2), transform.rotation);
+	hitboxInstantiated.velocity = transform.TransformDirection(Vector3(0, 0, baseAttackRange));
+	hitboxInstantiated.SendMessage("Damage", baseAttackDamage);
+	hitboxInstantiated.SendMessage("Duration", baseAttackDuration);
+	hitboxInstantiated.SendMessage("HitstunDuration", baseAttackHitstunDuration);
 	Invoke("AttackCooldownPhase", attackStrikingPeriod);
 }
 
@@ -112,18 +113,20 @@ function AbleToRotate (receivedInput : boolean) {
 }
 
 function HitstunImmobilizationPhase(hitstunDuration : float) {
-	hitParticles.Emit(10);
-	Debug.Log("Gent Hitstun");
-	CancelInvoke();
-	AbleToMove(false);
-	AbleToAttack(false);
-	AbleToRotate(false);
-	if (hitstunDuration > minimumHitstunDuration) {
-		Invoke("HitstunRecoveryPhase", hitstunDuration * hitstunReduction);
-		BroadcastMessage("PlayGentHitstun");
-	}
-	else {
-		Invoke("HitstunRecoveryPhase", 0.00);
+	if (amIDead == false) {
+		hitboxInstantiated.SendMessage("DestroySelf");
+		hitParticles.Emit(10);
+		CancelInvoke();
+		AbleToMove(false);
+		AbleToAttack(false);
+		AbleToRotate(false);
+		if (hitstunDuration > minimumHitstunDuration) {
+			Invoke("HitstunRecoveryPhase", hitstunDuration * hitstunReduction);
+			BroadcastMessage("PlayGentHitstun");
+		}
+		else {
+			Invoke("HitstunRecoveryPhase", 0.00);
+		}
 	}
 }
 
@@ -134,6 +137,7 @@ function HitstunRecoveryPhase () {
 }
 
 function PlayGentDeath () {
+	hitParticles.Emit(10);
 	Physics.IgnoreCollision(collider, player.collider);
 	amIDead = true;
 	Destroy(gameObject, deathDuration);

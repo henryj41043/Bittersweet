@@ -6,8 +6,10 @@ private var spacingX:float;
 private var spacingY:float = -0.06;
 private var Xinterval:float = 0.025;
 private var hearts = new Array();
+var ableToTakeDamage : boolean;
 
 function Start () {
+	ableToTakeDamage = true;
 	curHealth = maxHealth;
 	AddHearts();
 }
@@ -29,22 +31,24 @@ function AddHearts(){
 }
 
 function ApplyDamage (damage : int) {
-	if(curHealth <= 0){
-		return;
+	if (ableToTakeDamage == true) {
+		if(curHealth <= 0){
+			return;
+		}
+		
+		ModifyHearts(damage);
+		
+		if(curHealth <= 0){
+			Die();
+		}	
 	}
-	
-	ModifyHearts(damage);
-	
-	if(curHealth <= 0){
-		Die();
-	}	
 }
 
 private var windowRect : Rect;
 	
 function Die () {
 	BroadcastMessage("PlayMassaDeath");
-	Invoke("loadLoseScreen", 3.0);
+	//Destroy(this.gameObject);
 }
 
 function ModifyHearts(lostHearts : int){
@@ -61,7 +65,10 @@ function Restart () {
 	Application.LoadLevel(0);
 }
 
-function loadLoseScreen(){
-	Debug.Log("I am trying to load the lose screen!");
-	Application.LoadLevel("LoseScreen");
+function AbleToTakeDamage () {
+	ableToTakeDamage = true;
+}
+
+function UnableToTakeDamage () {
+	ableToTakeDamage = false;
 }

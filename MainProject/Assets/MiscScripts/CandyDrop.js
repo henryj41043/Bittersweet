@@ -1,35 +1,37 @@
 ﻿#pragma strict
 
 var player : GameObject;
-private var IsThePlayerStandingOnMe : boolean;
+var dropRange : float;
+var dropped : boolean;
 
 var candyIdentifier : int;
 
+var sparkle : ParticleEmitter;
+
 function Start () {
-	IsThePlayerStandingOnMe = false;
+	Invoke("FinishDrop", 0.1);
 }
 
-function OnTriggerEnter (player:Collider) {
-	IsThePlayerStandingOnMe = true;
-	if (candyIdentifier == 1) {
-		player.SendMessage("StandingOnChocolateDrop", SendMessageOptions.DontRequireReceiver);
+function OnTriggerEnter (object:Collider) {
+	if (object.tag == "Player") {
+		object.SendMessage("addCandy");
+		DestroyCandyDrop();
 	}
-	if (candyIdentifier == 2) {
-		player.SendMessage("StandingOnGummyDrop", SendMessageOptions.DontRequireReceiver);
+	if (object.tag == "ChocolateDrop" || object.tag == "GummyDrop" || object.tag == "LollipopDrop") {
+		if (dropped == false) {
+			transform.position.x += Random.Range(-dropRange, dropRange);
+			transform.position.z += Random.Range(-dropRange, dropRange);
+		}
 	}
-	if (candyIdentifier == 3) {
-		player.SendMessage("StandingOnLollipopDrop", SendMessageOptions.DontRequireReceiver);
-	}
-}
-
-function OnTriggerExit (player:Collider) {
-	IsThePlayerStandingOnMe = false;
-	player.SendMessage("ResetStanding", SendMessageOptions.DontRequireReceiver);
 }
 
 function DestroyCandyDrop () {
-	if (IsThePlayerStandingOnMe == true) {
-		//player.SendMessage("ResetStanding");
-		Destroy(gameObject);
-	}
+	sparkle.transform.parent = null;
+	sparkle.emit = false;
+	Destroy(sparkle, 2.0);
+	Destroy(gameObject);
+}
+
+function FinishDrop () {
+	dropped = true;
 }

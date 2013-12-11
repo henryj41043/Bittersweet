@@ -32,13 +32,12 @@ function Start () {
 function Update () {
 	moveDirection = Vector3(transform.forward.x, -10, transform.forward.z);
 	if (sliding == true) {
-		Debug.Log("Sliding");
 		controller.Move(moveDirection * Time.deltaTime * travelSpeed);
 	}
 }
 
 function StickySlideWindupPhase () {
-	Debug.Log("StickySlideWindupPhase");
+	SendMessage("UnableToTakeDamage");
 	SendMessage("AbleToMove", false);
 	SendMessage("AbleToAttack", false);
 	SendMessage("AbleToDodge", false);
@@ -48,21 +47,19 @@ function StickySlideWindupPhase () {
 }
 
 function StickySlideMovementPhase () {
-	Debug.Log("StickySlideMovementPhase");
 	sliding = true;
 	Physics.IgnoreLayerCollision(8, 9, true);
 	Invoke("StickySlideCooldownPhase", phaseChange2);
 }
 
 function StickySlideCooldownPhase () {
-	Debug.Log("StickySlideCooldownPhase");
 	sliding = false;
 	Physics.IgnoreLayerCollision(8, 9, false);
 	Invoke("StickySlideEndPhase", 0);
 }
 
 function StickySlideEndPhase () {
-	Debug.Log("StickySlideEndPhase");
+	SendMessage("AbleToTakeDamage");
 	SendMessage("AbleToMove", true);
 	SendMessage("AbleToAttack", true);
 	SendMessage("AbleToDodge", true);

@@ -1,13 +1,18 @@
 ﻿#pragma strict
 
-private var damage : float;
-private var hitstunDuration : float;
+var damage : float;
+var hitstunDuration : float;
+var blastEffect : GameObject;
+var blast : boolean;
+var duration : float;
 
-function OnTriggerEnter (object : Collider) {
-	if (object.tag == "Enemy") {
-		object.SendMessage("ApplyDamage", damage);
-		object.SendMessage("HitstunImmobilizationPhase", hitstunDuration);
-	}
+function Start () {
+	Invoke("EnableBlast", 0.4);
+	Invoke("DestroySelf", duration);
+}
+
+function EnableBlast () {
+	blastEffect.SetActive(true);
 }
 
 function Damage (receivedDamage : float) {
@@ -23,5 +28,6 @@ function Duration (receivedAttackDuration : float) {
 }
 
 function DestroySelf () {
+	blast = false;
 	Destroy(gameObject);
 }

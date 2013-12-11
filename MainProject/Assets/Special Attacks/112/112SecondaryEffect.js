@@ -3,37 +3,41 @@
 
 private var damageTick : boolean;
 private var trailTickInterval : float;
-
+var trailDuration : float;
 
 function Start () {
-        damageTick = true;
+	damageTick = true;
+	Invoke("DestroySelf", trailDuration);
 }
 
+/*function Update () {
+	if (animation["Take001"].time == trailDuration) {
+		DestroySelf();
+	}
+}*/
 
 function DamageTickIsOff () {
-        Invoke("TurnDamageTickOn", trailTickInterval);
+	Invoke("TurnDamageTickOn", trailTickInterval);
 }
 
-
 function TurnDamageTickOn () {
-        damageTick = true;
+	damageTick = true;
 }
 
 
 function OnTriggerEnter (object : Collider) {
-        if (object.tag == "Enemy"/* && damageTick == true*/) {
-                //object.SendMessage("HitstunImmobilizationPhase", 1);
-                //damageTick = false;
-                //DamageTickIsOff();
-        }
+	if (object.tag == "Enemy"/* && damageTick == true*/) {
+		//object.SendMessage("HitstunImmobilizationPhase", 1);
+		//damageTick = false;
+		//DamageTickIsOff();
+	}
 }
-
 
 function TrailDuration (receivedTrailDuration : float) {
-        Invoke("DestroySelf", receivedTrailDuration);
+	trailDuration = receivedTrailDuration;
+	Invoke("DestroySelf", receivedTrailDuration);
 }
 
-
 function DestroySelf () {
-        Destroy(gameObject);
+	Destroy(gameObject);
 }

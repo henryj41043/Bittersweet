@@ -85,7 +85,7 @@ function Update () {
 		
 	}
 	
-	if(cooldown == 0.0 && transformationIsEndable == true){
+	if((cooldown == 0.0 && transformationIsEndable == true)){
 		inCooldown = false;
 		GetComponent(PlayerControls).CurrentTransformation(0);
 		transformationIsEndable = false;
