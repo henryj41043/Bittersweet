@@ -27,6 +27,8 @@ private var lollipopLevel4Y = 142;
 private var lollipopLevel5X = 22;
 private var lollipopLevel5Y = 188;
 
+var newMusic: AudioClip;
+
 function Start(){	
 	// all the ones not implemented yet
 	
@@ -155,5 +157,13 @@ function OnGUI () {
 	if(GUI.Button(Rect(backX, backY, backWidth, backHeight), "", backStyle))
 	{
 		Application.LoadLevel("TitleScene");
+		
+		var menuMusic : GameObject = GameObject.Find("MenuMusic");
+    	if (menuMusic) {
+        // kill menu music
+        	Destroy(menuMusic);
+   		 }
+   		 // make sure we survive going to different scene
+		
 	}
 }

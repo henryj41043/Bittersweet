@@ -6,6 +6,14 @@ Put this on a GameObject unattached to anything. Replace the Input.GetKeyDown wi
 
 function Update () {
 	if (Input.GetKeyDown (KeyCode.Return)) { 
-		Application.LoadLevel("WorldMap"); 
+		Application.LoadLevel("WorldMap");
+		/*
+		var menuMusic : GameObject = GameObject.Find("MenuMusic");
+    if (menuMusic) {
+        // kill menu music
+        Destroy(menuMusic);
+    }
+    */
+		
 	}
 }

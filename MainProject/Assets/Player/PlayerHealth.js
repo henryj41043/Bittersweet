@@ -64,6 +64,11 @@ function ModifyHearts(lostHearts : int){
 function loadLoseScreen() {
 	Screen.lockCursor = false;
 	Application.LoadLevel("Lose");
+	var gameMusic : GameObject = GameObject.Find("GameMusic");
+    if (gameMusic) {
+        // kill menu music
+        Destroy(gameMusic);
+    }
 }
 
 function AbleToTakeDamage () {
