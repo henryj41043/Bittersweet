@@ -9,6 +9,9 @@ private var cooldownTime = 10.0;
 private var cooldown = 0.0;
 private var candyCount = 0.0;
 public var inCooldown = false;
+var stickyTruffleIcon : GUITexture;
+var stickySlideIcon : GUITexture;
+var truffleFragIcon : GUITexture;
 var candyBarGUI : GUITexture;
 var candyPickUp : AudioClip;
 var candyFull : AudioClip;
@@ -21,6 +24,9 @@ private var transformationIsEndable : boolean;
 
 function Start () {
 	candyBarGUIWidth = candyBarGUI.pixelInset.width;
+	stickyTruffleIcon.enabled = false;
+	stickySlideIcon.enabled = false;
+	truffleFragIcon.enabled = false;
 }
 
 function Update () {
@@ -37,6 +43,15 @@ function Update () {
 		candyCount = 0.0;
 		cooldown = 0.0;
 		GetComponent(PlayerControls).CurrentTransformation(0);
+		if(stickyTruffleIcon.enabled){
+			stickyTruffleIcon.enabled = false;
+		}
+		if(stickySlideIcon.enabled){
+			stickySlideIcon.enabled = false;
+		}
+		if(truffleFragIcon.enabled){
+			truffleFragIcon.enabled = false;
+		}
 	}	
 	
 	if (Input.GetKeyDown("0")){ 
@@ -45,6 +60,7 @@ function Update () {
 		
 	if(transformEnabled){
 		if(Input.GetKeyDown("1")){
+			stickyTruffleIcon.enabled = true;
 			GetComponent(PlayerControls).CurrentTransformation(1);
 			transformEnabled = false;
 			transformationIsEndable = true;
@@ -56,6 +72,7 @@ function Update () {
 			}
 		}
 		if(Input.GetKeyDown("2")){
+			stickySlideIcon.enabled = true;
 			GetComponent(PlayerControls).CurrentTransformation(2);
 			transformEnabled = false;
 			transformationIsEndable = true;
@@ -67,6 +84,7 @@ function Update () {
 			}
 		}
 		if(Input.GetKeyDown("3")){
+			truffleFragIcon.enabled = true;
 			GetComponent(PlayerControls).CurrentTransformation(3);
 			transformEnabled = false;
 			transformationIsEndable = true;
@@ -135,8 +153,11 @@ function OnTriggerStay (object:Collider) {
 }
 
 function addCandy(){
-	if(candyCount < candyBarSize){
+	if(candyCount < candyBarSize && !inCooldown){
 		candyCount = candyCount + 1.0;
+	}
+	if(inCooldown && cooldown > 0.0 && cooldown < cooldownTime){
+		cooldown = cooldown + 1.0;
 	}
 }
 
@@ -155,6 +176,15 @@ function updateCandyBarGUI(){
 		}
 		if(cooldown == 0.0){
 			candyCount = 0.0;
+			if(stickyTruffleIcon.enabled){
+				stickyTruffleIcon.enabled = false;
+			}
+			if(stickySlideIcon.enabled){
+				stickySlideIcon.enabled = false;
+			}
+			if(truffleFragIcon.enabled){
+				truffleFragIcon.enabled = false;
+			}
 		}
 	}
 }
