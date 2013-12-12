@@ -136,14 +136,14 @@ function OnGUI () {
 	if(PlayerPrefs.GetInt("lollipopLevel4") == 1){
 		if(GUI.Button(Rect(lollipopLevel4X, lollipopLevel4Y, buttonWidth, buttonHeight), "", lollipopLevel4Style))
 		{
-		
+			Application.LoadLevel("LollipopLevel4");
 		}
 	}
 	
 	if(PlayerPrefs.GetInt("lollipopLevel5") == 1){
 		if(GUI.Button(Rect(lollipopLevel5X, lollipopLevel5Y, starWidth, starHeight), "", lollipopLevel5Style))
 		{
-		
+			Application.LoadLevel("LollipopLevel5");
 		}
 	}
 	
