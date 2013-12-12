@@ -82,7 +82,7 @@ function AttackWindupPhase () {
 }
 
 function AttackStrikingPhase () {
-	hitboxInstantiated = Instantiate(hitbox, transform.position + (transform.forward * 2), transform.rotation);
+	hitboxInstantiated = Instantiate(hitbox, transform.position + (transform.forward * 2), Quaternion(0, 0, 0, 0));
 	hitboxInstantiated.velocity = transform.TransformDirection(Vector3(0, 0, baseAttackRange));
 	hitboxInstantiated.SendMessage("Damage", baseAttackDamage);
 	hitboxInstantiated.SendMessage("Duration", baseAttackDuration);
@@ -114,7 +114,6 @@ function AbleToRotate (receivedInput : boolean) {
 
 function HitstunImmobilizationPhase(hitstunDuration : float) {
 	if (amIDead == false) {
-		hitboxInstantiated.SendMessage("DestroySelf");
 		hitParticles.Emit(10);
 		CancelInvoke();
 		AbleToMove(false);
@@ -127,6 +126,7 @@ function HitstunImmobilizationPhase(hitstunDuration : float) {
 		else {
 			Invoke("HitstunRecoveryPhase", 0.00);
 		}
+		hitboxInstantiated.SendMessage("DestroySelf");
 	}
 }
 
