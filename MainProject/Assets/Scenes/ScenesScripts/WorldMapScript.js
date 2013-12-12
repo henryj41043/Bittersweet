@@ -167,3 +167,26 @@ function OnGUI () {
 		
 	}
 }
+
+function Update(){
+	if(Input.GetKeyDown("9")){
+		if(PlayerPrefs.GetInt("lollipopLevel3") == 1){
+			PlayerPrefs.SetInt("lollipopLevel3", 0);
+		}
+		else if(PlayerPrefs.GetInt("lollipopLevel3") == 0){
+			PlayerPrefs.SetInt("lollipopLevel3", 1);
+		}
+		if(PlayerPrefs.GetInt("lollipopLevel4") == 1){
+			PlayerPrefs.SetInt("lollipopLevel4", 0);
+		}
+		else if(PlayerPrefs.GetInt("lollipopLevel4") == 0){
+			PlayerPrefs.SetInt("lollipopLevel4", 1);
+		}
+		if(PlayerPrefs.GetInt("lollipopLevel5") == 1){
+			PlayerPrefs.SetInt("lollipopLevel5", 0);
+		}
+		else if(PlayerPrefs.GetInt("lollipopLevel5") == 0){
+			PlayerPrefs.SetInt("lollipopLevel5", 1);
+		}	
+	}
+}
