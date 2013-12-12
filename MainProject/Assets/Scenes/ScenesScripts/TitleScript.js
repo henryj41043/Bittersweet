@@ -15,6 +15,13 @@ private var helpButtonY = 425;
 private var creditsButtonX = 350;
 private var creditsButtonY = 490;
 
+function Start(){
+	PlayerPrefs.SetInt("castle", 1);
+	PlayerPrefs.SetInt("lollipopLevel3", 0);
+	PlayerPrefs.SetInt("lollipopLevel4", 0);
+	PlayerPrefs.SetInt("lollipopLevel5", 0);
+}
+
 function OnGUI () {
 	if(GUI.Button(Rect(startButtonX, startButtonY,buttonWidth,buttonHeight),"",startButtonStyle))
 	{

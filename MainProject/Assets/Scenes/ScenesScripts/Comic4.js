@@ -20,6 +20,7 @@ function OnGUI () {
 	if(GUI.Button(Rect(nextX, nextY, buttonWidth, buttonHeight), "", nextStyle))
 	{
 		PlayerPrefs.SetInt("lollipopLevel3", 1);
+		PlayerPrefs.SetInt("castle", 2);
 		Application.LoadLevel("WorldMap");
 	
 	}
