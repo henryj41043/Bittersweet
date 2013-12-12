@@ -19,6 +19,7 @@ function OnGUI () {
 	
 	if(GUI.Button(Rect(nextX, nextY, buttonWidth, buttonHeight), "", nextStyle))
 	{
+		PlayerPrefs.SetInt("lollipopLevel3", 1);
 		Application.LoadLevel("WorldMap");
 	
 	}
