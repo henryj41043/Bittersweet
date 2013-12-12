@@ -31,6 +31,14 @@ function Update () {
 			DestroyCandy = true;
 		}
 	
+	if(Input.GetKeyDown(KeyCode.E) && inCooldown == true){
+		inCooldown = false;
+		transformationIsEndable = false;
+		candyCount = 0.0;
+		cooldown = 0.0;
+		GetComponent(PlayerControls).CurrentTransformation(0);
+	}	
+	
 	if (Input.GetKeyDown("0")){ 
 		candyCount = candyCount + 1.0;
 	}
